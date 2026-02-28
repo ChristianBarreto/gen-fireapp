@@ -10,15 +10,7 @@ import { getAnalytics, logEvent } from "firebase/analytics";
 
 export const isProductionMode = process.env.NODE_ENV === 'production'
 
-const firebaseConfig = {
-  // apiKey: "AIzaSyABCz5FMFYj5HHfxsb0QArGtSMTsYUEorQ",
-  // authDomain: "totem-tour.firebaseapp.com",
-  // projectId: "totem-tour",
-  // storageBucket: "totem-tour.appspot.com",
-  // messagingSenderId: "335364335110",
-  // appId: "1:335364335110:web:ba7dcfcad7b342a071c587",
-  // measurementId: "G-MDGS5J1TP0"
-};
+const firebaseConfig = {};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
