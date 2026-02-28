@@ -1,25 +1,4 @@
-import { Totem } from "./controllers/totems/types";
-import { Customer } from "./controllers/customers/types";
 import { ParsedQs } from "qs";
-
-export const initTotem: Totem = {
-  id: "",
-  nickName: "",
-  locationDescription: "",
-  responsiblePerson: "",
-  posId: "",
-  cityOrder: "",
-  showTestProduct: false,
-  lastPing: null,
-  lastUpdated: "",
-  timestamp: "",
-};
-
-export const initCustomer: Customer = {
-  name: "",
-  email: "",
-  phone: "",
-};
 
 export type QueryKey = {
   [key: string]: {
@@ -74,6 +53,15 @@ export const useOperator = (queryKey: QueryKey) => {
     return "<=";
   }
   return "==";
+}
+
+export const queryFilterRef = (collectionRef: any, query: ParsedQs) => {
+  for (const key in query) {
+    if (key !== "orderBy" && key !== "limit") {
+      collectionRef = collectionRef.where(key, useOperator(query[key] as QueryKey), sanitizeQuery(query[key] as ParsedQs))
+    }
+  }
+  return collectionRef;
 }
 
 export const queryRef = (collectionRef: any, query: ParsedQs) => {

@@ -1,0 +1,20 @@
+[
+  {
+    "resource": "parts",
+    "resourceName": "Parts",
+    "url": "parts",
+    "fields": [
+      {"field": "name", "name": "Name", "type": "text", "nullable": false},
+      {"field": "quantity", "name": "Quantity", "type": "number", "nullable": false},
+      {"field": "departments", "name": "Department", "type": "fk", "fkField": "name", "nullable": false}
+    ]
+  },
+  {
+    "resource": "departments",
+    "resourceName": "Departments",
+    "url": "departments",
+    "fields": [
+      {"field": "name", "name": "Name", "type": "text", "nullable": false}
+    ]
+  }
+]
