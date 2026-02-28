@@ -11,26 +11,15 @@ import { getAnalytics, logEvent } from "firebase/analytics";
 export const isProductionMode = process.env.NODE_ENV === 'production'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyABCz5FMFYj5HHfxsb0QArGtSMTsYUEorQ",
-  authDomain: "totem-tour.firebaseapp.com",
-  projectId: "totem-tour",
-  storageBucket: "totem-tour.appspot.com",
-  messagingSenderId: "335364335110",
-  appId: "1:335364335110:web:ba7dcfcad7b342a071c587",
-  measurementId: "G-MDGS5J1TP0"
+  // apiKey: "AIzaSyABCz5FMFYj5HHfxsb0QArGtSMTsYUEorQ",
+  // authDomain: "totem-tour.firebaseapp.com",
+  // projectId: "totem-tour",
+  // storageBucket: "totem-tour.appspot.com",
+  // messagingSenderId: "335364335110",
+  // appId: "1:335364335110:web:ba7dcfcad7b342a071c587",
+  // measurementId: "G-MDGS5J1TP0"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
-
-type eventData = {
-  totemNickName: string,
-}
-
-export const logEvents = (eventName: string, data: eventData) => {
-  if (isProductionMode) {
-    logEvent(analytics, eventName, data)
-  }
-  
-}

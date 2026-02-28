@@ -57,7 +57,7 @@ export const useOperator = (queryKey: QueryKey) => {
 
 export const queryFilterRef = (collectionRef: any, query: ParsedQs) => {
   for (const key in query) {
-    if (key !== "orderBy" && key !== "limit") {
+    if (key !== "orderBy" && key !== "limit" && key !== "page") {
       collectionRef = collectionRef.where(key, useOperator(query[key] as QueryKey), sanitizeQuery(query[key] as ParsedQs))
     }
   }
@@ -81,7 +81,15 @@ export const queryRef = (collectionRef: any, query: ParsedQs) => {
       // console.log("QUERY LIMIT", limit);
       collectionRef = collectionRef.limit(Number(limit));
 
-    } else if (key !== "orderBy") {
+    } else if (key === "page") {
+      const page = query[key];
+      const limit = query["limit"] ? Number(query["limit"]) : 10;
+      const offset = Number(page) * limit;
+      if (offset > 0) {
+        collectionRef = collectionRef.offset(offset);
+      }
+
+    } else if (key !== "orderBy" && key !== "limit") {
       // console.log("Query key", query[key])
 
       // console.log("QUERY WHERE", key, useOperator(query[key] as QueryKey), sanitizeQuery(query[key]))
