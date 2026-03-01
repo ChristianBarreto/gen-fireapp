@@ -57,7 +57,7 @@ export const useOperator = (queryKey: QueryKey) => {
 
 export const queryFilterRef = (collectionRef: any, query: ParsedQs) => {
   for (const key in query) {
-    if (key !== "orderBy" && key !== "limit" && key !== "page") {
+    if (key !== "orderBy" && key !== "limit" && key !== "page" && key !== "deep") {
       collectionRef = collectionRef.where(key, useOperator(query[key] as QueryKey), sanitizeQuery(query[key] as ParsedQs))
     }
   }
@@ -92,7 +92,7 @@ export const queryRef = (collectionRef: any, query: ParsedQs) => {
         collectionRef = collectionRef.offset(offset);
       }
 
-    } else if (key !== "orderBy" && key !== "limit") {
+    } else if (key !== "orderBy" && key !== "limit" && key !== "deep") {
       // console.log("Query key", query[key])
 
       // console.log("QUERY WHERE", key, useOperator(query[key] as QueryKey), sanitizeQuery(query[key]))

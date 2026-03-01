@@ -18,15 +18,11 @@ export default function FetchModalFkSelect({
 
   useEffect(() => {
     if (field.type === "fk") {
-      getList(field.field).then((res) => {
+      getList(field.field, { deep: 0 }).then((res) => {
         setOptions(res.data.map((item) => ({ id: item.id, value: item.id, label: item[field.fkField] })));
       })
     }
   }, []);
-
-  console.log("Field: ", field);
-  console.log("Options: ", options);
-  console.log("Item: ", item[field.field]?.id);
 
   return (
     <div id={field.field}>
@@ -37,7 +33,7 @@ export default function FetchModalFkSelect({
           labelId={`${field.field}-label`}
           id={field.field}
           name={field.field}
-          value={options.length > 0 ? (item[field.field]?.id ?? "") : ""}
+          value={options.length > 0 ? (item[field.field] ?? "") : ""}
           label={field.name}
           onChange={(e) => handleChange(e)}
         >

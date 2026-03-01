@@ -27,7 +27,7 @@ export default function ListPage() {
 
   useEffect(() => {
     setIsLoading(true);
-    const params = Object.fromEntries(searchParams.entries());
+    const params = { deep: "1", ...Object.fromEntries(searchParams.entries()) };
     getList(resource?.resource, params).then((res) => {
       setData(res);
       setIsLoading(false);

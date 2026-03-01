@@ -57,11 +57,15 @@ export default function AddEditPage() {
         console.log(err);
       });
     } else if (pageMode === "edit") {
-      // editItemById(item.id, item);
+      editItemById(resource?.resource, item.id, item).then((res) => {
+        navigate(-1)
+      }).catch((err) => {
+        console.log(err);
+      });
     }
   }
 
-  console.log(">>>> Item: ", item);
+  console.log("Item: ", item);
   return (
     <div>
       {pageMode} {resourceName}

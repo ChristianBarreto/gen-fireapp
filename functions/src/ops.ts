@@ -3,7 +3,11 @@ import type { Request, Response } from "express";
 import { sortGetData } from "./helpers";
 const schema = require("../../src/schema.json");
 
-const getItemFkData = (item: any, endPointname: string): Promise<any> => new Promise((resolve, reject) => {
+const getItemFkData = (item: any, endPointname: string, deep: number = 1): Promise<any> => new Promise((resolve, reject) => {
+  if (deep <= 0) {
+    resolve(item);
+    return;
+  }
   const returnItem = {...item};
   const promises: Promise<any>[] = [];
   const resourceSchema = schema.find((res) => res.resource === endPointname);
@@ -11,7 +15,8 @@ const getItemFkData = (item: any, endPointname: string): Promise<any> => new Pro
 
   for (let fkField of fkFields) {
     promises.push(
-      getDbItem(fkField.field, item[fkField.field]).then((res) => res)
+      getDbItem(fkField.field, item[fkField.field])
+        .then((res) => deep > 1 ? getItemFkData(res, fkField.field, deep - 1) : res)
     );
   }
 
@@ -24,9 +29,9 @@ const getItemFkData = (item: any, endPointname: string): Promise<any> => new Pro
 
 });
 
-const getListFkData = (data: any[], endPointname: string): Promise<any[]> => new Promise((resolve, reject) => {
+const getListFkData = (data: any[], endPointname: string, deep: number = 1): Promise<any[]> => new Promise((resolve, reject) => {
   const promises = data.map((item) => {
-    return getItemFkData(item, endPointname)
+    return getItemFkData(item, endPointname, deep)
   });
   Promise.all(promises).then((results) => {
     resolve(results);
@@ -34,11 +39,17 @@ const getListFkData = (data: any[], endPointname: string): Promise<any[]> => new
 });
 
 export const getItemsDb = (endPointname: string, req: Request, res: Response) => new Promise((resolve) => {
+  const deep = req.query.deep ? Number(req.query.deep) : 0;
   getDbItems(endPointname, req.query).then(({ data, totalCount }) => {
     if (!data.length) {
       resolve(res.status(200).json({ data: [], pagination: { total: 0 } }));
+    } else if (deep <= 0) {
+      resolve(res.status(200).json({
+        data: data.sort((a, b) => sortGetData(a, b, req.query)),
+        pagination: { total: totalCount }
+      }));
     } else {
-      getListFkData(data, endPointname).then((dataWithFks) => {
+      getListFkData(data, endPointname, deep).then((dataWithFks) => {
         resolve(res.status(200).json({
           data: dataWithFks.sort((a, b) => sortGetData(a, b, req.query)),
           pagination: { total: totalCount }
@@ -49,10 +60,15 @@ export const getItemsDb = (endPointname: string, req: Request, res: Response) =>
 });
 
 export const getItemIdDb = (endPointname: string, req: Request, res: Response) => new Promise((resolve) => {
+  const deep = req.query.deep ? Number(req.query.deep) : 0;
   getDbItem(endPointname, req.params.id).then((item) => {
-    getItemFkData(item, endPointname).then((dataWithFks) => {
-      resolve(res.status(200).json(dataWithFks));
-    }) 
+    if (deep <= 0) {
+      resolve(res.status(200).json(item));
+    } else {
+      getItemFkData(item, endPointname, deep).then((dataWithFks) => {
+        resolve(res.status(200).json(dataWithFks));
+      });
+    }
   }).catch((err) => {
       resolve(res.status(404).json({error: "Item not found"}));
   });

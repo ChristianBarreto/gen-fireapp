@@ -16,5 +16,15 @@
     "fields": [
       {"field": "name", "name": "Name", "type": "text", "nullable": false}
     ]
+  },
+  {
+    "resource": "recipes",
+    "resourceName": "Recipes",
+    "url": "recipes",
+    "fields": [
+      {"field": "name", "name": "Name", "type": "text", "nullable": false},
+      {"field": "ingredients", "name": "Ingredients", "type": "text", "nullable": false},
+      {"field": "instructions", "name": "Instructions", "type": "text", "nullable": false}
+    ]
   }
 ]
