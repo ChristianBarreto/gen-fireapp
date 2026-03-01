@@ -9,6 +9,7 @@ import { TableHeaderItem } from './types';
 import TableFooter from '@mui/material/TableFooter';
 import TablePagination from '@mui/material/TablePagination';
 import TablePaginationFooter from './TablePaginationFooter/index';
+import dayjs from 'dayjs';
 
 export default function FetchTable({
   tableHeader,
@@ -30,6 +31,7 @@ export default function FetchTable({
             {tableHeader?.map((header) => (
               <TableCell align="left" key={header?.name}>{header?.name}</TableCell>
             ))}
+            <TableCell align="left">Created On</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -62,6 +64,9 @@ export default function FetchTable({
                       }
                     </TableCell>
                   ))}
+                  <TableCell align="left">
+                    {item.timestamp ? dayjs(item.timestamp as string | number | Date).format('YYYY-MM-DD HH:mm:ss') : '-'}
+                  </TableCell>
                 </TableRow>
               ))}
             </>
