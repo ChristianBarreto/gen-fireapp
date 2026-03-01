@@ -59,6 +59,7 @@ export default function ListPage() {
         data={data}
         isLoading={isLoading}
         isError={isError}
+        resourceName={resourceUrl}
       />
     </div>
   )

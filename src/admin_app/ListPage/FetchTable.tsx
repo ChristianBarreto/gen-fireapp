@@ -10,18 +10,23 @@ import TableFooter from '@mui/material/TableFooter';
 import TablePagination from '@mui/material/TablePagination';
 import TablePaginationFooter from './TablePaginationFooter/index';
 import dayjs from 'dayjs';
+import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 
 export default function FetchTable({
   tableHeader,
   data,
   isLoading,
   isError,
+  resourceName,
 }: {
   tableHeader: TableHeaderItem[],
   data: { data: Array<{ id: string | number;[key: string]: unknown }>, pagination: unknown },
   isLoading: boolean
   isError: boolean
+  resourceName?: string
 }) {
+  const navigate = useNavigate();
 
   return (
     <TableContainer component={Paper}>
@@ -32,6 +37,7 @@ export default function FetchTable({
               <TableCell align="left" key={header?.name}>{header?.name}</TableCell>
             ))}
             <TableCell align="left">Created On</TableCell>
+            <TableCell align="center">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -66,6 +72,14 @@ export default function FetchTable({
                   ))}
                   <TableCell align="left">
                     {item.timestamp ? dayjs(item.timestamp as string | number | Date).format('YYYY-MM-DD HH:mm:ss') : '-'}
+                  </TableCell>
+                  <TableCell align="center">
+                    <Button
+                      variant="outlined"
+                      onClick={() => navigate(`/${resourceName}/edit/${item.id}`)}
+                    >
+                      Edit
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
