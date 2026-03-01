@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import schema from "../../schema.json";
 import FetchModalText from './FetchModalText';
 import FetchModalSelect from './FetchModalSelect';
@@ -18,24 +18,29 @@ export default function AddEditPage() {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
 
-  const resourceUrl = location?.pathname.split("/").slice(-2)[0];
-  const pageMode = location?.pathname.split("/").slice(-1)[0] === "add" ? "add" : "edit";
-  const resourceName = location?.pathname.split("/").slice(-2)[0];
+  const pathParts = location?.pathname.split("/");
+  const lastSegment = pathParts.slice(-1)[0];
+  const pageMode = lastSegment === "add" ? "add" : "edit";
+  const resourceUrl = pageMode === "add" ? pathParts.slice(-2)[0] : pathParts.slice(-2)[0];
+  const resourceName = resourceUrl;
   const resource = schema.find((res) => res.url === resourceUrl);
 
   useEffect(() => {
-    if(pageMode === "edit") {
-      getItemById(resource?.resource, "id").then((res) => {
-        setData(res);
+    if (pageMode === "edit" && id) {
+      getItemById(resource?.resource, id).then((res) => {
+        setItem(res);
         setIsLoading(false);
         setIsError(false);
       }).catch((err) => {
         setIsError(true);
         setIsLoading(false);
-      })
+      });
+    } else {
+      setIsLoading(false);
     }
-  }, []);
+  }, [id]);
 
   const handleChange = (e) => {
     setItem({
@@ -43,7 +48,7 @@ export default function AddEditPage() {
       [e.target.name]: e.target.value,
     })
   }
-   
+
   const handleSubmit = () => {
     if (pageMode === "add") {
       addItem(resource?.resource, item).then((res) => {
@@ -56,26 +61,27 @@ export default function AddEditPage() {
     }
   }
 
+  console.log(">>>> Item: ", item);
   return (
     <div>
       {pageMode} {resourceName}
-        <form>
-          {resource?.fields.map((field) => (
-            <Fragment key={`${field?.field}`}>
-              {field.type === "text" && <FetchModalText item={item} input={field} handleChange={handleChange} />}
-              {field.type === "number" && <FetchModalText item={item} input={field} handleChange={handleChange} />}
-              {field.type === "select" && <FetchModalSelect item={item} input={field} handleChange={handleChange}/>}
-              {field.type === "fk" && <FetchModalFkSelect item={item} field={field} handleChange={handleChange}/>}
-              {field.type === "caption" && <FetchModalReadOnly item={field} input={field} handleChange={handleChange}/>}
-              {/* {field.type === "fk" && <FetchModalFk item={field} input={field} handleChange={handleChange}/>} */}
-              {field.type === "captionDateTime" && <FetchModalReadOnlyDataTime item={field} input={field} handleChange={handleChange}/>}
-            </Fragment>
-          ))}
-        </form>
-          <Button onClick={() => navigate(-1)}>Cancel</Button>
-          <Button color="info" variant="contained" onClick={handleSubmit}>
-            Submit
-          </Button>
+      <form>
+        {resource?.fields.map((field) => (
+          <Fragment key={`${field?.field}`}>
+            {field.type === "text" && <FetchModalText item={item} input={field} handleChange={handleChange} />}
+            {field.type === "number" && <FetchModalText item={item} input={field} handleChange={handleChange} />}
+            {field.type === "select" && <FetchModalSelect item={item} input={field} handleChange={handleChange} />}
+            {field.type === "fk" && <FetchModalFkSelect item={item} field={field} handleChange={handleChange} />}
+            {field.type === "caption" && <FetchModalReadOnly item={field} input={field} handleChange={handleChange} />}
+            {/* {field.type === "fk" && <FetchModalFk item={field} input={field} handleChange={handleChange}/>} */}
+            {field.type === "captionDateTime" && <FetchModalReadOnlyDataTime item={field} input={field} handleChange={handleChange} />}
+          </Fragment>
+        ))}
+      </form>
+      <Button onClick={() => navigate(-1)}>Cancel</Button>
+      <Button color="info" variant="contained" onClick={handleSubmit}>
+        Submit
+      </Button>
     </div>
   );
 }
