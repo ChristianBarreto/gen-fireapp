@@ -19,7 +19,7 @@ export default function FetchModalFkSelect({
   useEffect(() => {
     if (field.type === "fk") {
       getList(field.field).then((res) => {
-        setOptions(res.map((item) => ({id: item.id, value: item.id, label: item[field.fkField]})));
+        setOptions(res.data.map((item) => ({id: item.id, value: item.id, label: item[field.fkField]})));
       })
     }
   }, []);

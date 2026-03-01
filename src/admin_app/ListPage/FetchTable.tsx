@@ -76,7 +76,7 @@ export default function FetchTable({
                   <TableCell align="center">
                     <Button
                       variant="outlined"
-                      onClick={() => navigate(`/${resourceName}/edit/${item.id}`)}
+                      onClick={() => navigate(`/admin/${resourceName}/${item.id}`)}
                     >
                       Edit
                     </Button>

@@ -7,6 +7,7 @@ import AdminDashboard from "./admin_app/AdminDashboard";
 import AdminTemplate from "./admin_app/AdminTemplate";
 import ListPage from "./admin_app/ListPage";
 import AddEditPage from "./admin_app/AddEditPage";
+import schema from "./schema.json";
 
 export const rawRoutes = [
   {
@@ -27,30 +28,20 @@ export const rawRoutes = [
         index: true,
         element: <AdminDashboard />,
       },
-      {
-        path: "/admin/parts",
-        element: <ListPage />,
-      },
-      {
-        path: "/admin/parts/add/",
-        element: <AddEditPage />,
-      },
-      {
-        path: "/admin/parts/:id",
-        element: <AddEditPage />,
-      },
-      {
-        path: "/admin/departments",
-        element: <ListPage />,
-      },
-      {
-        path: "/admin/departments/add/",
-        element: <AddEditPage />,
-      },
-      {
-        path: "/admin/departments/:id",
-        element: <AddEditPage />,
-      },
+      ...schema.flatMap(resource => [
+        {
+          path: `/admin/${resource.url}`,
+          element: <ListPage />,
+        },
+        {
+          path: `/admin/${resource.url}/add/`,
+          element: <AddEditPage />,
+        },
+        {
+          path: `/admin/${resource.url}/:id`,
+          element: <AddEditPage />,
+        }
+      ])
     ]
   }
 ]

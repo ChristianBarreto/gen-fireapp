@@ -28,7 +28,7 @@ export default function TablePaginationFooter({
 
   return (
     <TablePagination
-      rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+      rowsPerPageOptions={[5, 10, 25]}
       colSpan={4}
       count={pagination?.total || 0}
       rowsPerPage={rowsPerPage}
