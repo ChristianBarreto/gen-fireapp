@@ -65,6 +65,9 @@ export const queryFilterRef = (collectionRef: any, query: ParsedQs) => {
 }
 
 export const queryRef = (collectionRef: any, query: ParsedQs) => {
+  if (!query?.orderBy) {
+    collectionRef = collectionRef.orderBy("timestamp", "desc");
+  }
   // console.log("Query", query)
   for (const key in query) {
     if ((key === "orderBy")) {
