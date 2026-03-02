@@ -6,11 +6,11 @@ export type Sort = any;
 
 export type TableHeaderItem = {
   name: string,
-  value: string,
-  component?: ReactNode
-  text?: boolean,
-  fk?: string,
-  fkKey: string,
+  field: string,
+  type: 'text' | 'number' | 'fk' | 'long-text' | string,
+  fkField?: string,
+  nullable?: boolean,
+  component?: ReactNode,
 }
 
 export interface AnyObject {

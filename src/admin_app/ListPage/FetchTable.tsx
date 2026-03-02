@@ -11,6 +11,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TablePaginationFooter from './TablePaginationFooter/index';
 import dayjs from 'dayjs';
 import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from 'react-router-dom';
 
 export default function FetchTable({
@@ -58,13 +59,24 @@ export default function FetchTable({
                     <TableCell
                       align="left"
                       key={`${index}-${item.id}`}
+                      sx={header?.type === 'long-text' ? {
+                        maxWidth: 200,
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      } : undefined}
                     >
                       {
                         <>
                           {/* {header.component &&  (<div className={String(item.id)}>{header.component}</div>)} */}
                           {header?.type === "text" && item[header.field]}
                           {header?.type === "number" && item[header.field]}
-                          {(header?.type === "fk") && (item[header.field] as Record<string, unknown>)?.[header.fkField]}
+                          {(header?.type === "fk") && (item[header.field] as Record<string, unknown>)?.[header.fkField as string]}
+                          {header?.type === "long-text" && (
+                            <Tooltip title={String(item[header.field] ?? '')} placement="top">
+                              <span>{String(item[header.field] ?? '')}</span>
+                            </Tooltip>
+                          )}
                           {/* {(header.type === "fk") && "FK"} */}
                         </>
                       }

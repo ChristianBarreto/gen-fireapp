@@ -4,11 +4,8 @@ import Grid from "@mui/material/Grid";
 import FetchTable from "./FetchTable";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-// import { addItem, deleteItem, editItem, getItem, getList } from "../../../db/firebaseIntegration.ts";
 import { useUser } from "../../context/UserContext";
-// import FetchModal from "../../organisms/FetchModal/index.tsx";
-// import { TableButton } from "../../organisms/FetchTable/TableComponents/TableButton/index.tsx";
-// import FetchSnackbar from "../../organisms/FetchSnackbar/index.tsx";
+import FetchSnackbar from "../FetchSnackbar";
 import schema from "../../schema.json";
 import { getList } from "../../api";
 
@@ -16,6 +13,7 @@ export default function ListPage() {
   const [data, setData] = useState({ data: [], pagination: { total: 0 } });
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [snackData, setSnackData] = useState({ open: false, severity: 'info', text: '' });
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -32,9 +30,11 @@ export default function ListPage() {
       setData(res);
       setIsLoading(false);
       setIsError(false);
+      setSnackData({ open: true, severity: 'info', text: 'Data loaded successfully.' });
     }).catch((err) => {
       setIsError(true);
       setIsLoading(false);
+      setSnackData({ open: true, severity: 'error', text: 'Failed to load data.' });
     })
   }, [resource.resource, searchParams]);
 
@@ -61,6 +61,7 @@ export default function ListPage() {
         isError={isError}
         resourceName={resourceUrl}
       />
+      <FetchSnackbar snackData={snackData} setSnackData={setSnackData} />
     </div>
   )
 }

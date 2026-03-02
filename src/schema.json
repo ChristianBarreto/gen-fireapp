@@ -23,8 +23,8 @@
     "url": "recipes",
     "fields": [
       {"field": "name", "name": "Name", "type": "text", "nullable": false},
-      {"field": "ingredients", "name": "Ingredients", "type": "text", "nullable": false},
-      {"field": "instructions", "name": "Instructions", "type": "text", "nullable": false}
+      {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
+      {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
     ]
   }
 ]
