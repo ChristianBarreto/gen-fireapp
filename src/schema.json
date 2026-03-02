@@ -1,8 +1,8 @@
 [
   {
-    "resource": "parts",
-    "resourceName": "Parts",
-    "url": "parts",
+    "resource": "receivements",
+    "resourceName": "Receivements",
+    "url": "receivements",
     "fields": [
       {"field": "name", "name": "Name", "type": "text", "nullable": false},
       {"field": "quantity", "name": "Quantity", "type": "number", "nullable": false},
@@ -10,21 +10,99 @@
     ]
   },
   {
-    "resource": "departments",
-    "resourceName": "Departments",
-    "url": "departments",
+    "resource": "jobs",
+    "resourceName": "Jobs",
+    "url": "jobs",
     "fields": [
       {"field": "name", "name": "Name", "type": "text", "nullable": false}
     ]
   },
   {
-    "resource": "recipes",
-    "resourceName": "Recipes",
-    "url": "recipes",
+    "resource": "projects",
+    "resourceName": "Projects",
+    "url": "projects",
     "fields": [
       {"field": "name", "name": "Name", "type": "text", "nullable": false},
       {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
       {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
+    ]
+  },
+    {
+    "resource": "product-parts",
+    "resourceName": "Product Parts",
+    "url": "product-parts",
+    "fields": [
+      {"field": "name", "name": "Name", "type": "text", "nullable": false},
+      {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
+      {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
+    ]
+  },
+  {
+    "resource": "parts",
+    "resourceName": "Parts",
+    "url": "parts",
+    "fields": [
+      {"field": "name", "name": "Name", "type": "text", "nullable": false},
+      {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
+      {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
+    ]
+  },
+  {
+    "resource": "departments",
+    "resourceName": "Departments",
+    "url": "departments",
+    "fields": [
+      {"field": "name", "name": "Name", "type": "text", "nullable": false},
+      {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
+      {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
+    ]
+  },
+  {
+    "resource": "stations",
+    "resourceName": "Stations",
+    "url": "stations",
+    "fields": [
+      {"field": "name", "name": "Name", "type": "text", "nullable": false},
+      {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
+      {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
+    ]
+  },
+  {
+    "resource": "parks",
+    "resourceName": "Parks",
+    "url": "parks",
+    "fields": [
+      {"field": "name", "name": "Name", "type": "text", "nullable": false},
+      {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
+      {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
+    ]
+  },
+  {
+    "resource": "products",
+    "resourceName": "Products",
+    "url": "products",
+    "fields": [
+      {"field": "name", "name": "Name", "type": "text", "nullable": false},
+      {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
+      {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
+    ]
+  },
+  {
+    "resource": "users",
+    "resourceName": "Users",
+    "url": "users",
+    "fields": [
+      {"field": "name", "name": "Name", "type": "text", "nullable": false},
+      {"field": "email", "name": "Email", "type": "text", "nullable": false},
+      {"field": "user-roles", "name": "Role", "type": "fk", "fkField": "role", "nullable": false}
+    ]
+  },
+  {
+    "resource": "user-roles",
+    "resourceName": "User Roles",
+    "url": "user-roles",
+    "fields": [
+      {"field": "role", "name": "Role", "type": "text", "nullable": false}
     ]
   }
 ]

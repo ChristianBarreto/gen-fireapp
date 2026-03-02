@@ -31,7 +31,7 @@ export default function FetchTable({
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 650 }} size="small" aria-label="simple table">
         <TableHead>
           <TableRow>
             {tableHeader?.map((header) => (
@@ -88,6 +88,7 @@ export default function FetchTable({
                   <TableCell align="center">
                     <Button
                       variant="outlined"
+                      size="small"
                       onClick={() => navigate(`/admin/${resourceName}/${item.id}`)}
                     >
                       Edit

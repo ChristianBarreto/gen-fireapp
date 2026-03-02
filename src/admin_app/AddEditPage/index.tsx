@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import schema from "../../schema.json";
 import FetchModalText from './FetchModalText';
+import FetchModalLongText from './FetchModalLongText';
 import FetchModalSelect from './FetchModalSelect';
 import FetchModalFkSelect from './FetchModalFkSelect';
 import FetchModalReadOnly from './FetchModalReadOnly';
@@ -74,6 +75,7 @@ export default function AddEditPage() {
           <Fragment key={`${field?.field}`}>
             {field.type === "text" && <FetchModalText item={item} input={field} handleChange={handleChange} />}
             {field.type === "number" && <FetchModalText item={item} input={field} handleChange={handleChange} />}
+            {field.type === "long-text" && <FetchModalLongText item={item} input={field} handleChange={handleChange} />}
             {field.type === "select" && <FetchModalSelect item={item} input={field} handleChange={handleChange} />}
             {field.type === "fk" && <FetchModalFkSelect item={item} field={field} handleChange={handleChange} />}
             {field.type === "caption" && <FetchModalReadOnly item={field} input={field} handleChange={handleChange} />}
