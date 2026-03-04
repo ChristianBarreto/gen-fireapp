@@ -12,6 +12,10 @@ import TablePaginationFooter from './TablePaginationFooter/index';
 import dayjs from 'dayjs';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
+import CircularProgress from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { useNavigate } from 'react-router-dom';
 
 export default function FetchTable({
@@ -44,12 +48,34 @@ export default function FetchTable({
         <TableBody>
           {isLoading && (
             <TableRow>
-              <TableCell align="left">...loading</TableCell>
+              <TableCell
+                colSpan={tableHeader.length + 2}
+                align="center"
+                sx={{ py: 4, borderBottom: 'none' }}
+              >
+                <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
+                  <CircularProgress size={32} thickness={4} />
+                  <Typography variant="caption" color="text.secondary">
+                    Loading data…
+                  </Typography>
+                </Box>
+              </TableCell>
             </TableRow>
           )}
           {isError ? (
             <TableRow>
-              <TableCell align="left">Error fetching data!</TableCell>
+              <TableCell
+                colSpan={tableHeader.length + 2}
+                align="center"
+                sx={{ py: 4, borderBottom: 'none' }}
+              >
+                <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
+                  <ErrorOutlineIcon sx={{ fontSize: 36, color: 'error.main' }} />
+                  <Typography variant="caption" color="error">
+                    Failed to load data. Please try again.
+                  </Typography>
+                </Box>
+              </TableCell>
             </TableRow>
           ) : (
             <>

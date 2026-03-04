@@ -24,7 +24,9 @@ export default function ListPage() {
   const resource = schema.find((res) => res.url === resourceUrl);
 
   useEffect(() => {
+    setData({ data: [], pagination: { total: 0 } });
     setIsLoading(true);
+    setIsError(false)
     const params = { deep: "1", ...Object.fromEntries(searchParams.entries()) };
     getList(resource?.resource, params).then((res) => {
       setData(res);

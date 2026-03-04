@@ -4,9 +4,9 @@
     "resourceName": "Receivements",
     "url": "receivements",
     "fields": [
-      {"field": "name", "name": "Name", "type": "text", "nullable": false},
+      {"field": "parts", "name": "Parts", "type": "fk", "fkField": "parts", "nullable": false},
       {"field": "quantity", "name": "Quantity", "type": "number", "nullable": false},
-      {"field": "departments", "name": "Department", "type": "fk", "fkField": "name", "nullable": false}
+      {"field": "jobs", "name": "Job", "type": "fk", "fkField": "job", "nullable": false}
     ]
   },
   {
@@ -14,7 +14,11 @@
     "resourceName": "Jobs",
     "url": "jobs",
     "fields": [
-      {"field": "name", "name": "Name", "type": "text", "nullable": false}
+      {"field": "job-number", "name": "Job Number", "type": "text", "nullable": false},
+      {"field": "projects", "name": "Projects", "type": "fk", "fkField": "projects", "nullable": false},
+      {"field": "unit-qty", "name": "Qty of units", "type": "number", "nullable": false},
+      {"field": "start-date", "name": "Start date", "type": "date", "nullable": false},
+      {"field": "end-date", "name": "End date", "type": "date", "nullable": false}
     ]
   },
   {
@@ -23,8 +27,7 @@
     "url": "projects",
     "fields": [
       {"field": "name", "name": "Name", "type": "text", "nullable": false},
-      {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
-      {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
+      {"field": "product-id", "name": "Product ID", "type": "fk", "fkField": "product-id", "nullable": false}
     ]
   },
     {
@@ -32,19 +35,27 @@
     "resourceName": "Product Parts",
     "url": "product-parts",
     "fields": [
-      {"field": "name", "name": "Name", "type": "text", "nullable": false},
-      {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
-      {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
+      {"field": "products", "name": "Product", "type": "fk", "fkField": "name", "nullable": false},
+      {"field": "parts", "name": "Part", "type": "fk", "fkField": "name", "nullable": false},
+      {"field": "quantity", "name": "Quantity", "type": "number", "nullable": false}
     ]
   },
-  {
+  { 
     "resource": "parts",
     "resourceName": "Parts",
     "url": "parts",
     "fields": [
       {"field": "name", "name": "Name", "type": "text", "nullable": false},
-      {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
-      {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
+      {"field": "part-types", "name": "Type", "type": "fk", "fkField": "part-type", "nullable": false},
+      {"field": "departments", "name": "Department", "type": "fk", "fkField": "name", "nullable": false}
+    ]
+  },
+  {
+    "resource": "part-types",
+    "resourceName": "Part Types",
+    "url": "part-types",
+    "fields": [
+      {"field": "part-type", "name": "Part Type", "type": "text", "nullable": false}
     ]
   },
   {
@@ -53,8 +64,7 @@
     "url": "departments",
     "fields": [
       {"field": "name", "name": "Name", "type": "text", "nullable": false},
-      {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
-      {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
+      {"field": "description", "name": "Description", "type": "long-text", "nullable": false}
     ]
   },
   {
@@ -63,8 +73,7 @@
     "url": "stations",
     "fields": [
       {"field": "name", "name": "Name", "type": "text", "nullable": false},
-      {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
-      {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
+      {"field": "description", "name": "Description", "type": "long-text", "nullable": false}
     ]
   },
   {
@@ -73,8 +82,7 @@
     "url": "parks",
     "fields": [
       {"field": "name", "name": "Name", "type": "text", "nullable": false},
-      {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
-      {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
+      {"field": "description", "name": "Description", "type": "long-text", "nullable": false}
     ]
   },
   {
@@ -83,8 +91,8 @@
     "url": "products",
     "fields": [
       {"field": "name", "name": "Name", "type": "text", "nullable": false},
-      {"field": "ingredients", "name": "Ingredients", "type": "long-text", "nullable": false},
-      {"field": "instructions", "name": "Instructions", "type": "long-text", "nullable": false}
+      {"field": "type", "name": "Type", "type": "text", "nullable": false},
+      {"field": "description", "name": "Description", "type": "long-text", "nullable": false}
     ]
   },
   {

@@ -8,7 +8,7 @@ import FetchModalFkSelect from './FetchModalFkSelect';
 import FetchModalReadOnly from './FetchModalReadOnly';
 import FetchModalFk from './FetchModalFk';
 import FetchModalReadOnlyDataTime from './FetchModalReadOnlyDataTime';
-import { Button } from '@mui/material';
+import { Backdrop, Box, Button, CircularProgress, Typography } from '@mui/material';
 import { addItem, editItemById, getItemById } from '../../api';
 
 export default function AddEditPage() {
@@ -20,6 +20,8 @@ export default function AddEditPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+
+  console.log("is loading", isLoading);
 
   const pathParts = location?.pathname.split("/");
   const lastSegment = pathParts.slice(-1)[0];
@@ -69,6 +71,12 @@ export default function AddEditPage() {
   console.log("Item: ", item);
   return (
     <div>
+      <Backdrop open={isLoading} sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
+          <CircularProgress color="inherit" />
+          <Typography variant="body2">Loading…</Typography>
+        </Box>
+      </Backdrop>
       {pageMode} {resourceName}
       <form>
         {resource?.fields.map((field) => (

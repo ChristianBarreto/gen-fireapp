@@ -40,6 +40,7 @@ const getListFkData = (data: any[], endPointname: string, deep: number = 1): Pro
 
 export const getItemsDb = (endPointname: string, req: Request, res: Response) => new Promise((resolve) => {
   const deep = req.query.deep ? Number(req.query.deep) : 0;
+
   getDbItems(endPointname, req.query).then(({ data, totalCount }) => {
     if (!data.length) {
       resolve(res.status(200).json({ data: [], pagination: { total: 0 } }));
@@ -61,6 +62,7 @@ export const getItemsDb = (endPointname: string, req: Request, res: Response) =>
 
 export const getItemIdDb = (endPointname: string, req: Request, res: Response) => new Promise((resolve) => {
   const deep = req.query.deep ? Number(req.query.deep) : 0;
+
   getDbItem(endPointname, req.params.id).then((item) => {
     if (deep <= 0) {
       resolve(res.status(200).json(item));

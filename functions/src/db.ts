@@ -3,7 +3,6 @@ import { db } from "./index";
 
 export async function getDbItems(dbName: string, query?: any): Promise<{ data: any[], totalCount: number }> {
   let collectionRef = await db.collection(dbName); 
-  
   let countRef = queryFilterRef(collectionRef, query);
   const countSnapshot = await countRef.count().get();
   const totalCount = countSnapshot.data().count;
