@@ -100,7 +100,7 @@ export default function AddEditPage() {
             {field.type === "select" && <FieldSelect item={item} input={field} handleChange={handleChange} />}
             {field.type === "fk" && <FieldFkSelect item={item} field={field} handleChange={handleChange} />}
             {field.type === "caption" && <FieldReadOnly item={field} input={field} handleChange={handleChange} />}
-            {field.type === "captionDateTime" && <ReadOnlyDataTime item={field} input={field} handleChange={handleChange} />}
+            {/* {field.type === "captionDateTime" && <ReadOnlyDataTime item={field} input={field} handleChange={handleChange} />} */}
           </Fragment>
         ))}
       </form>
