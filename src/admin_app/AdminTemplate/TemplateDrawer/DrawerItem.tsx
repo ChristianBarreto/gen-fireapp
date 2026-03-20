@@ -3,8 +3,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router-dom";
-import MailIcon from '@mui/icons-material/Mail';
-
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export default function AdminDrawerItem({
   name,
@@ -19,7 +18,7 @@ export default function AdminDrawerItem({
     <ListItem disablePadding>
       <ListItemButton onClick={() => navigate(url)}>
         <ListItemIcon>
-          <MailIcon />
+          <ArrowForwardIosIcon />
         </ListItemIcon>
         <ListItemText primary={name} />
       </ListItemButton>
