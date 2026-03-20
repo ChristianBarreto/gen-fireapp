@@ -10,6 +10,7 @@ import FieldReadOnly from './FieldReadOnly';
 import FieldLongText from './FieldLongText';
 import FieldSelect from './FieldSelect';
 import FieldFkSelect from './FieldFkSelect';
+import dayjs from 'dayjs';
 
 export default function AddEditPage() {
   const [item, setItem] = useState<any>({});
@@ -21,8 +22,6 @@ export default function AddEditPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-
-  console.log("is loading", isLoading);
 
   const pathParts = location?.pathname.split("/");
   const lastSegment = pathParts.slice(-1)[0];
@@ -89,7 +88,9 @@ export default function AddEditPage() {
           <Typography variant="body2">Loading…</Typography>
         </Box>
       </Backdrop>
-      {pageMode} {resourceName}
+      <Typography variant="h4" gutterBottom>
+        {pageMode.charAt(0).toUpperCase() + pageMode.slice(1)} {resourceName.charAt(0).toUpperCase() + resourceName.slice(1)}
+      </Typography>
       <form>
         {resource?.fields.map((field) => (
           <Fragment key={`${field?.field}`}>
@@ -112,7 +113,12 @@ export default function AddEditPage() {
           Delete
         </Button>
       )}
-
+      {pageMode === "edit" && (
+        <div style={{ marginTop: "16px" }}>
+          <Typography variant="body2">Created on {dayjs(item.timestamp).format("YYYY-MM-DD HH:mm:ss")}</Typography>
+          <Typography variant="body2">Last updated on {dayjs(item.lastUpdated).format("YYYY-MM-DD HH:mm:ss")}</Typography>
+        </div>
+      )}
 
       <Dialog
         open={openDeleteModal}

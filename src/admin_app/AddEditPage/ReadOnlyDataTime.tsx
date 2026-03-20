@@ -4,14 +4,12 @@ import dayjs from "dayjs";
 export default function FetchModalReadOnlyDataTime({
   item,
   input,
-  handleChange,
 }: {
   item: any,
   input: any,
-  handleChange: (data: string) => void
 }) {
   return (
-     <div>
+    <div>
       <Typography
         variant="caption"
         color="gray"
