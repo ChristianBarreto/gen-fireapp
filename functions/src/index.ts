@@ -11,7 +11,7 @@ import {
   deleteItemIdDb
 } from "./ops";
 
-const schema = require("../../src/schema.json");
+const schema = require("./schema.json");
 
 const app = express();
 
