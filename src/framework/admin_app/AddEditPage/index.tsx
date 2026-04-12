@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import schema from "../../schema.json";
+import schema from "../../../schema.json";
 
 import { Backdrop, Box, Button, CircularProgress, Typography, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { addItem, editItemById, getItemById, deleteItemById } from '../../api';

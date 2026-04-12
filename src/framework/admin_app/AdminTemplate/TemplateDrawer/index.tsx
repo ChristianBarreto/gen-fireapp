@@ -10,7 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import DrawerItem from './DrawerItem';
 // import { useUser } from "../../../context/UserContext.tsx";
-import schema from '../../../schema.json';
+import schema from '../../../../schema.json';
 
 const drawerWidth = 240;
 

@@ -1,7 +1,7 @@
 import { addDbItem, getDbItem, getDbItems, editDbItem, deleteDbItem } from "./db";
 import type { Request, Response } from "express";
 import { sortGetData } from "./helpers";
-const schema = require("./schema.json");
+const schema = require("../schema.json");
 
 const getItemFkData = (item: any, endPointname: string, deep: number = 1): Promise<any> => new Promise((resolve, reject) => {
   if (deep <= 0) {

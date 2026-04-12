@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import FetchSnackbar from "../FetchSnackbar";
-import schema from "../../schema.json";
+import schema from "../../../schema.json";
 import { getList } from "../../api";
 
 export default function ListPage() {
