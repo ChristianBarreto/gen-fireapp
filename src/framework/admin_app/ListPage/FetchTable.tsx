@@ -17,6 +17,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { useNavigate } from 'react-router-dom';
+import ColumnFilter from './AdvancedFilters/ColumnFilter';
 
 export default function FetchTable({
   tableHeader,
@@ -39,7 +40,12 @@ export default function FetchTable({
         <TableHead>
           <TableRow>
             {tableHeader?.map((header) => (
-              <TableCell align="left" key={header?.name}>{header?.name}</TableCell>
+              <TableCell align="left" key={header?.name}>
+                <Box display="flex" alignItems="center" gap={0.5}>
+                  {header?.name}
+                  <ColumnFilter header={header} />
+                </Box>
+              </TableCell>
             ))}
             <TableCell align="left">Created On</TableCell>
             <TableCell align="center">Actions</TableCell>
