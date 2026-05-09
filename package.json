@@ -36,7 +36,9 @@
     "lint:fix": "npx eslint src --fix",
     "test:unit": "jest",
     "test:cypress": "cypress run",
-    "dev:cypress": "cypress open"
+    "dev:cypress": "cypress open",
+    "generate-indexes": "node generate-indexes.js",
+    "deploy": "npm run generate-indexes && firebase deploy"
   },
   "eslintConfig": {
     "extends": [

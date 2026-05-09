@@ -70,48 +70,48 @@
         }
       ]
     },
-    // {
-    //   "collectionGroup": "jobs",
-    //   "queryScope": "COLLECTION",
-    //   "fields": [
-    //     {
-    //       "fieldPath": "unit-qty",
-    //       "order": "ASCENDING"
-    //     },
-    //     {
-    //       "fieldPath": "timestamp",
-    //       "order": "DESCENDING"
-    //     }
-    //   ]
-    // },
-    // {
-    //   "collectionGroup": "jobs",
-    //   "queryScope": "COLLECTION",
-    //   "fields": [
-    //     {
-    //       "fieldPath": "start-date",
-    //       "order": "ASCENDING"
-    //     },
-    //     {
-    //       "fieldPath": "timestamp",
-    //       "order": "DESCENDING"
-    //     }
-    //   ]
-    // },
-    // {
-    //   "collectionGroup": "jobs",
-    //   "queryScope": "COLLECTION",
-    //   "fields": [
-    //     {
-    //       "fieldPath": "end-date",
-    //       "order": "ASCENDING"
-    //     },
-    //     {
-    //       "fieldPath": "timestamp",
-    //       "order": "DESCENDING"
-    //     }
-    //   ]
-    // },
+    {
+      "collectionGroup": "jobs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "unit-qty",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "jobs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "start-date",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "jobs",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "end-date",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
     {
       "collectionGroup": "projects",
       "queryScope": "COLLECTION",
