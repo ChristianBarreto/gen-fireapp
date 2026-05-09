@@ -28,16 +28,12 @@ app.use(function(request: Request, response: Response, next: any) {
   next();
 });
 
-const routes = schema.map((res: any) => res.resource);
-
-app.get(`/test`, async (req: Request, res: Response) => res.send("test"));
-
-routes.forEach((route: any) => {
-  app.get(`/${route}`, async (req: Request, res: Response) => getItemsDb(route, req, res));
-  app.get(`/${route}/:id`, async (req: Request, res: Response) => getItemIdDb(route, req, res));
-  app.post(`/${route}`, async (req: Request, res: Response) => addItemDb(route, req, res));
-  app.put(`/${route}/:id`, async (req: Request, res: Response) => editItemIdDb(route, req, res));
-  app.delete(`/${route}/:id`, async (req: Request, res: Response) => deleteItemIdDb(route, req, res));
+schema.forEach((schemaItem: any) => {
+  app.get(`/${schemaItem.url}`, async (req: Request, res: Response) => getItemsDb(schemaItem.resource, req, res));
+  app.get(`/${schemaItem.url}/:id`, async (req: Request, res: Response) => getItemIdDb(schemaItem.resource, req, res));
+  app.post(`/${schemaItem.url}`, async (req: Request, res: Response) => addItemDb(schemaItem.resource, req, res));
+  app.put(`/${schemaItem.url}/:id`, async (req: Request, res: Response) => editItemIdDb(schemaItem.resource, req, res));
+  app.delete(`/${schemaItem.url}/:id`, async (req: Request, res: Response) => deleteItemIdDb(schemaItem.resource, req, res));
 });
 
 export const genfireapp = onRequest(app);

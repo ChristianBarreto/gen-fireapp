@@ -16,9 +16,9 @@
     "fields": [
       {"field": "name", "name": "Job Number", "type": "text", "nullable": false},
       {"field": "projects", "name": "Projects", "type": "fk", "fkField": "name", "nullable": false},
-      {"field": "unit-qty", "name": "Qty of units", "type": "number", "nullable": false},
-      {"field": "start-date", "name": "Start date", "type": "date", "nullable": false},
-      {"field": "end-date", "name": "End date", "type": "date", "nullable": false}
+      {"field": "unitQty", "name": "Qty of units", "type": "number", "nullable": false},
+      {"field": "startDate", "name": "Start date", "type": "date", "nullable": false},
+      {"field": "endDate", "name": "End date", "type": "date", "nullable": false}
     ]
   },
   {
@@ -31,9 +31,9 @@
     ]
   },
     {
-    "resource": "product-parts",
+    "resource": "productParts",
     "resourceName": "Product Parts",
-    "url": "product-parts",
+    "url": "productParts",
     "fields": [
       {"field": "products", "name": "Product", "type": "fk", "fkField": "name", "nullable": false},
       {"field": "parts", "name": "Part", "type": "fk", "fkField": "name", "nullable": false},
@@ -46,16 +46,16 @@
     "url": "parts",
     "fields": [
       {"field": "name", "name": "Name", "type": "text", "nullable": false},
-      {"field": "part-types", "name": "Type", "type": "fk", "fkField": "part-type", "nullable": false},
+      {"field": "partTypes", "name": "Type", "type": "fk", "fkField": "partType", "nullable": false},
       {"field": "departments", "name": "Department", "type": "fk", "fkField": "name", "nullable": false}
     ]
   },
   {
-    "resource": "part-types",
+    "resource": "partTypes",
     "resourceName": "Part Types",
     "url": "part-types",
     "fields": [
-      {"field": "part-type", "name": "Part Type", "type": "text", "nullable": false}
+      {"field": "partType", "name": "Part Type", "type": "text", "nullable": false}
     ]
   },
   {
@@ -102,11 +102,11 @@
     "fields": [
       {"field": "name", "name": "Name", "type": "text", "nullable": false},
       {"field": "email", "name": "Email", "type": "text", "nullable": false},
-      {"field": "user-roles", "name": "Role", "type": "fk", "fkField": "role", "nullable": false}
+      {"field": "userRoles", "name": "Role", "type": "fk", "fkField": "role", "nullable": false}
     ]
   },
   {
-    "resource": "user-roles",
+    "resource": "userRoles",
     "resourceName": "User Roles",
     "url": "user-roles",
     "fields": [

@@ -14,10 +14,18 @@ const getItemFkData = (item: any, endPointname: string, deep: number = 1): Promi
   const fkFields = resourceSchema.fields.filter((field: any) => field.type === "fk");
 
   for (let fkField of fkFields) {
-    promises.push(
-      getDbItem(fkField.field, item[fkField.field])
-        .then((res) => deep > 1 ? getItemFkData(res, fkField.field, deep - 1) : res)
-    );
+    if (item[fkField.field]) {
+      promises.push(
+        getDbItem(fkField.field, String(item[fkField.field]))
+          .then((res) => deep > 1 ? getItemFkData(res, fkField.field, deep - 1) : res)
+          .catch((err) => {
+            console.error(`Error fetching FK ${fkField.field} for id ${item[fkField.field]}:`, err);
+            return null;
+          })
+      );
+    } else {
+      promises.push(Promise.resolve(null));
+    }
   }
 
   Promise.all(promises).then((results) => {

@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from 'react';
+import React, { useState, MouseEvent, useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import Popover from '@mui/material/Popover';
@@ -9,6 +9,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import { useSearchParams } from 'react-router-dom';
 import { TableHeaderItem } from '../types';
+import { getList } from '../../../api';
+import CircularProgress from '@mui/material/CircularProgress';
+import InputAdornment from '@mui/material/InputAdornment';
 
 interface ColumnFilterProps {
   header: TableHeaderItem;
@@ -36,6 +39,9 @@ export default function ColumnFilter({ header }: ColumnFilterProps) {
   const [operator, setOperator] = useState(initialOperator);
   const [value, setValue] = useState(initialValue);
 
+  const [fkOptions, setFkOptions] = useState<any[]>([]);
+  const [isLoadingFk, setIsLoadingFk] = useState(false);
+
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -46,6 +52,18 @@ export default function ColumnFilter({ header }: ColumnFilterProps) {
 
   const open = Boolean(anchorEl);
   const id = open ? 'filter-popover' : undefined;
+
+  useEffect(() => {
+    if (header.type === 'fk' && open && fkOptions.length === 0) {
+      setIsLoadingFk(true);
+      getList(header.field, { deep: 0 }).then((res) => {
+        setFkOptions(res.data.map((item: any) => ({ id: item.id, value: item.id, label: item[header.fkField as string] || item.id })));
+        setIsLoadingFk(false);
+      }).catch(() => {
+        setIsLoadingFk(false);
+      });
+    }
+  }, [header.type, header.field, header.fkField, open]);
 
   const handleApply = () => {
     const newParams = new URLSearchParams(searchParams);
@@ -63,6 +81,8 @@ export default function ColumnFilter({ header }: ColumnFilterProps) {
       let typeStr = 'str';
       if (header.type === 'number') {
         typeStr = 'num';
+      } else if (header.type === 'fk') {
+        typeStr = 'str';
       }
       // For boolean we could add 'boo', but currently not in types
       newParams.set(`${header.field}[${operator}][${typeStr}]`, value);
@@ -147,15 +167,42 @@ export default function ColumnFilter({ header }: ColumnFilterProps) {
             ))}
           </TextField>
 
-          <TextField
-            label="Value"
-            type={isDate ? 'date' : isNumber ? 'number' : 'text'}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            size="small"
-            fullWidth
-            InputLabelProps={isDate ? { shrink: true } : undefined}
-          />
+          {header.type === 'fk' ? (
+            <TextField
+              select
+              label="Value"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              size="small"
+              fullWidth
+              InputProps={{
+                endAdornment: isLoadingFk ? (
+                  <InputAdornment position="end" sx={{ mr: 2 }}>
+                    <CircularProgress size={18} />
+                  </InputAdornment>
+                ) : null
+              }}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {fkOptions.map((opt) => (
+                <MenuItem key={opt.id} value={opt.value}>
+                  {opt.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          ) : (
+            <TextField
+              label="Value"
+              type={isDate ? 'date' : isNumber ? 'number' : 'text'}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              size="small"
+              fullWidth
+              InputLabelProps={isDate ? { shrink: true } : undefined}
+            />
+          )}
 
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1, mt: 1 }}>
             <Button size="small" onClick={handleClear} color="error">

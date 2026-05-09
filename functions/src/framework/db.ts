@@ -23,6 +23,9 @@ export async function getDbItems(dbName: string, query?: any): Promise<{ data: a
 };
 
 export const getDbItem = async (dbName: string, id: string): Promise<any> => new Promise((resolve, reject) => {
+  if (!id || typeof id !== 'string') {
+    return reject(`Invalid id '${id}' provided for '${dbName}' DB`);
+  }
   db.collection(dbName).doc(id).get().then((snapshot: any) => {
     if (snapshot.exists) {
       resolve({id: snapshot.id, ...snapshot.data()})
