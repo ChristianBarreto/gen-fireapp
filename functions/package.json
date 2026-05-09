@@ -1,7 +1,7 @@
 {
   "name": "functions",
   "scripts": {
-    "prebuild": "node -e \"require('fs').copyFileSync('../src/schema.json', './src/schema.json')\"",
+    "prebuild": "node -e \"require('fs').copyFileSync('./src/schema.json', '../src/schema.json')\"",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "serve": "npm run build && firebase emulators:start --only functions",
