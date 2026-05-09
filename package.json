@@ -37,6 +37,8 @@
     "test:unit": "jest",
     "test:cypress": "cypress run",
     "dev:cypress": "cypress open",
+    "check-schema": "node check-schema.js",
+    "pregenerate-indexes": "npm run check-schema",
     "generate-indexes": "node generate-indexes.js",
     "deploy": "npm run generate-indexes && firebase deploy"
   },

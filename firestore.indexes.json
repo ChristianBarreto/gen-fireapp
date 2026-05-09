@@ -75,7 +75,7 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "unit-qty",
+          "fieldPath": "unitQty",
           "order": "ASCENDING"
         },
         {
@@ -89,7 +89,7 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "start-date",
+          "fieldPath": "startDate",
           "order": "ASCENDING"
         },
         {
@@ -103,7 +103,7 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "end-date",
+          "fieldPath": "endDate",
           "order": "ASCENDING"
         },
         {
@@ -141,7 +141,7 @@
       ]
     },
     {
-      "collectionGroup": "product-parts",
+      "collectionGroup": "productParts",
       "queryScope": "COLLECTION",
       "fields": [
         {
@@ -155,7 +155,7 @@
       ]
     },
     {
-      "collectionGroup": "product-parts",
+      "collectionGroup": "productParts",
       "queryScope": "COLLECTION",
       "fields": [
         {
@@ -169,7 +169,7 @@
       ]
     },
     {
-      "collectionGroup": "product-parts",
+      "collectionGroup": "productParts",
       "queryScope": "COLLECTION",
       "fields": [
         {
@@ -201,7 +201,7 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "part-types",
+          "fieldPath": "partTypes",
           "order": "ASCENDING"
         },
         {
@@ -225,11 +225,11 @@
       ]
     },
     {
-      "collectionGroup": "part-types",
+      "collectionGroup": "partTypes",
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "part-type",
+          "fieldPath": "partType",
           "order": "ASCENDING"
         },
         {
@@ -397,7 +397,7 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "user-roles",
+          "fieldPath": "userRoles",
           "order": "ASCENDING"
         },
         {
@@ -407,7 +407,7 @@
       ]
     },
     {
-      "collectionGroup": "user-roles",
+      "collectionGroup": "userRoles",
       "queryScope": "COLLECTION",
       "fields": [
         {

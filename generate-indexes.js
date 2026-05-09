@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const schemaPath = path.join(__dirname, 'src', 'schema.json');
+const schemaPath = path.join(__dirname, 'functions/src', 'schema.json');
 const outputPath = path.join(__dirname, 'firestore.indexes.json');
 
 try {
