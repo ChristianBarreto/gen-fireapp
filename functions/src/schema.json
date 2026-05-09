@@ -16,7 +16,7 @@
     "fields": [
       {"field": "name", "name": "Job Number", "type": "text", "nullable": false},
       {"field": "projects", "name": "Projects", "type": "fk", "fkField": "name", "nullable": false},
-      {"field": "unitQty", "name": "Qty of units", "type": "number", "nullable": false},
+      {"field": "unit-qty", "name": "Qty of units", "type": "number", "nullable": false},
       {"field": "start-date", "name": "Start date", "type": "date", "nullable": false},
       {"field": "end-date", "name": "End date", "type": "date", "nullable": false}
     ]
